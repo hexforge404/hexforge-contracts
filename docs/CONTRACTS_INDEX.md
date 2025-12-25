@@ -2,20 +2,31 @@
 
 This index is the single “map of the map” for every HexForge engine/agent contract.
 
-## Core shared schemas
+---
+
+## Core shared schemas (must be used by all engines)
 
 - `schemas/job_status.schema.json`  
   Standard status envelope all engines MUST return.
 
+- `schemas/job_manifest.schema.json`  
+  Standard manifest describing public outputs written for a job (relative `/assets/...` paths).
+
+---
+
 ## Engines
 
-### GlyphEngine (surface v1 engine)
+### GlyphEngine (Surface v1)
 - Filesystem: `engines/glyphengine/FILESYSTEM.md`
 - Interfaces: `engines/glyphengine/INTERFACES.md`
 
-## Contract rules (global)
+---
 
-- Engines MUST write public outputs under `/assets/<engine>/...` via the nginx-served host mount.
+## Global contract rules (non-negotiable)
+
+- Engines MUST write public outputs under `/assets/<namespace>/...` via the nginx-served host mount.
 - Engines MUST return ONLY relative public URLs beginning with `/assets/`.
-- Engines MUST return status using the `job_status.schema.json` envelope.
-- Engines MUST NOT write internal/debug artifacts into public asset paths.
+- Engines MUST return job status using `schemas/job_status.schema.json`.
+- Engines MUST generate a job manifest using `schemas/job_manifest.schema.json`.
+- Engines MUST NOT write internal/debug/temp artifacts into public asset paths.
+- Consumers (frontend/backend/assistant/foundry) MUST NOT write directly into engine public roots.

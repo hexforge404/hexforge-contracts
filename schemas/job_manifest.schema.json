@@ -3,8 +3,13 @@
   "$id": "https://hexforgelabs.com/schemas/job_manifest.schema.json",
   "title": "HexForge Job Manifest (v1)",
   "type": "object",
-  "required": ["job_id", "service", "public_root", "public"],
+  "required": ["version", "job_id", "service", "updated_at", "public_root", "public"],
   "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["v1"],
+      "description": "Manifest contract version."
+    },
     "job_id": {
       "type": "string",
       "minLength": 3,
@@ -15,8 +20,14 @@
       "minLength": 2,
       "description": "Engine/service name (e.g., hexforge-glyphengine)."
     },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 timestamp for last update."
+    },
     "subfolder": {
       "type": ["string", "null"],
+      "pattern": "^[A-Za-z0-9_-]+$",
       "description": "Optional sanitized subfolder used in public paths."
     },
     "public_root": {

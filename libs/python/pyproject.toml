@@ -1,6 +1,6 @@
 [project]
 name = "hexforge-contracts"
-version = "1.0.0"
+version = "1.0.4"
 description = "HexForge contracts: schemas, envelopes, and validators"
 requires-python = ">=3.10"
 dependencies = [
@@ -11,9 +11,9 @@ dependencies = [
 requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["hexforge_contracts"]
-
 [tool.setuptools.package-data]
-hexforge_contracts = ["../../../schemas/common/*.json"]
+hexforge_contracts = ["schemas/**/*.json"]
+
+[tool.setuptools]
+include-package-data = true
 

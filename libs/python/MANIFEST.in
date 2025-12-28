@@ -1,0 +1,1 @@
+recursive-include hexforge_contracts/schemas *.json
